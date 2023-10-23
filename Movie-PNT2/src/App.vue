@@ -1,30 +1,39 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <!-- Encabezado de la aplicación (si lo deseas) -->
+    <header>
+      <h1></h1>
+    </header>
+
+    <!-- Formulario de inicio de sesión -->
+    <login-form />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script>
+import LoginForm from './components/LoginForm.vue';
+
+export default {
+  name: 'App',
+  components: {
+    LoginForm,
+  },
+};
+</script>
+
+<style>
+/* Estilos globales de la aplicación */
+html, body {
+  height: 100%;
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el espacio de relleno predeterminado */
+  background-color: #17174f; /* Establece el color de fondo */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #17174f;
 }
 </style>

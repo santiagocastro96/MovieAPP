@@ -1,5 +1,10 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
 
-createApp(App).mount('#app')
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './routes/router'; // Importa tu enrutador
+
+const app = createApp(App);
+
+app.use(router); // Utiliza el enrutador
+
+app.mount('#app');
