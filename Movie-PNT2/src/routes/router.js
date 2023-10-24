@@ -4,11 +4,11 @@ import LoginView from '../views/LoginView.vue';
 
 const routes = [
   {
-    path: '/', // Ruta raíz
-    name: 'home', // Nombre opcional
-    component: LoginView, // Utiliza LoginView como la vista principal
+    path: '/', // 
+    name: 'home', // 
+    component: LoginView, // 
   },
-  // Otras rutas aquí...
+  
 ];
 
 const router = createRouter({

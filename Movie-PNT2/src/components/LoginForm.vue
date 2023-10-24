@@ -45,10 +45,10 @@
   
   <style scoped>
   .Movie-View{
-  position: relative; /* Para controlar la posición del label */
-  display: inline-block; /* Para que ocupe solo el ancho del contenido */
+  position: relative; /* Pos label */
+  display: inline-block; /* Para que ocupe SOLO el ancho del contenido */
 
-  /* Estilos de la etiqueta como botón */
+  
   background-color: #2729ac; /* Color de fondo */
   color: #fff; /* Color del texto */
   padding: 10px 20px; /* Relleno interno para darle tamaño */
@@ -61,7 +61,7 @@
   transform: translateX(-50%); /* La ajusta horizontalmente */
   position: relative;
 
-  box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.5) /*sombrita*/
+  box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.5) /*sombrita (?*/
   }
 
   .login-container {
