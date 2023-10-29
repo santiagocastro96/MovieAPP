@@ -2,7 +2,7 @@
   <div id="app">
     <!-- Encabezado de la aplicación (si lo deseas) -->
     <header>
-      <h1></h1>
+      <NavbarHeader />
     </header>
 
     <!-- Formulario de inicio de sesión -->
@@ -12,12 +12,15 @@
 
 <script>
 import LoginForm from './components/LoginForm.vue';
+import NavbarHeader from './components/NavbarHeader.vue';
 
 export default {
   name: 'App',
   components: {
     LoginForm,
-  },
+    NavbarHeader,
+    NavbarHeader
+},
 };
 </script>
 
@@ -29,11 +32,5 @@ html, body {
   padding: 0; /* Elimina el espacio de relleno predeterminado */
   background-color: #17174f; /* Establece el color de fondo */
 }
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #17174f;
-}
+
 </style>

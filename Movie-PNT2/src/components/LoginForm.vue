@@ -1,27 +1,32 @@
 <template>
-    <div class="login-container">
-      <form class="login-form">
+  <body>
+    <div class="wrapper">
+        <form action="">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" name="" id="userInput" placeholder="username" required>
+                <i class="fa fa-user"></i>
+            </div>
 
-        <div class="Movie-View">
-            <label>
-                <h1>MovieApp</h1>
-            </label>
-            
-        </div>
-        
-        <h2>Iniciar Sesión</h2>
-        <div class="input-group">
-          <label for="username">Nombre de Usuario:</label>
-          <input type="text" id="username" v-model="username" />
-        </div>
-        <div class="input-group">
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" v-model="password" />
-        </div>
-        <button class="login-button" @mouseover="isHovered = true" @mouseleave="isHovered = false" :style="buttonStyle">Iniciar Sesión</button>
-        <a class="forgot-password" href="#">¿Olvidaste tu contraseña?</a>
-      </form>
+            <div class="input-box">
+                <input type="password" name="" id="passInput" placeholder="password" required>
+                <i class="fa fa-lock"></i>
+            </div>
+
+            <div class="remember-forget">
+                <label for=""><input type="checkbox" name="" id="">Recordar</label>
+                <a href="#">Lorem ipsun</a>
+            </div>
+
+            <button type="submit" class="btn" id="btn">Login</button>
+
+            <div class="register-link">
+                <p>¿No tienes una cuenta? <a href="#">Registrate!</a></p>
+            </div>
+
+        </form>
     </div>
+    </body>
   </template>
   
   <script>
@@ -64,65 +69,115 @@
   box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.5) /*sombrita (?*/
   }
 
-  .login-container {
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #f0f0f0;
-  }
+    min-height: 100vh;
+    background: url("https://w0.peakpx.com/wallpaper/570/413/HD-wallpaper-red-cinema-chair.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
   
-  .login-form {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1{
+    font-size: 36px;
     text-align: center;
-  }
-  
-  .login-form h2 {
-    color: var(--ultramarine-600);
-  }
-  
-  .input-group {
-    
-    margin: 10px 0;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
+}
+
+.wrapper .input-box{
+    position: relative;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .login-button {
-    background: var(--ultramarine-600);
-    color: black;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  
-  .login-button:hover {
-    background: #42b0ff;
-  }
-  
-  .forgot-password {
-    color: var(--ultramarine-600);
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+    transition: border-color 0.4s ease;
+}
+
+.input-box input::placeholder{
+    color: #fff;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper .remember-forget{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.remember-forget label input{
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.remember-forget a{
+    color: #fff;
     text-decoration: none;
-    display: block;
-    margin-top: 10px;
-  }
+}
+
+.remember-forget a:hover{
+    text-decoration: underline;
+}
+
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.wrapper .register-link{
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px 0 15px;
+}
+
+.register-link p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover{
+    text-decoration: underline;
+}
   </style>
   
   
