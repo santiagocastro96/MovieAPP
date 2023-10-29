@@ -3,14 +3,19 @@
     <!-- Encabezado de la aplicación (si lo deseas) -->
     <header>
       <NavbarHeader />
+      
     </header>
-
+    <div class="contForm">
+      <LoginForm />
+    </div>
+    
     <!-- Formulario de inicio de sesión -->
-    <login-form />
+    
   </div>
 </template>
 
 <script>
+console.log('estoy en import');
 import LoginForm from './components/LoginForm.vue';
 import NavbarHeader from './components/NavbarHeader.vue';
 
@@ -19,12 +24,19 @@ export default {
   components: {
     LoginForm,
     NavbarHeader,
-    NavbarHeader
+    
 },
 };
 </script>
 
 <style>
+.contForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Estilos globales de la aplicación */
 html, body {
   height: 100%;
