@@ -6,7 +6,8 @@
       
     </header>
     <div class="contForm">
-      <LoginForm />
+      <router-view></router-view>
+     
     </div>
     
     <!-- Formulario de inicio de sesión -->
@@ -15,9 +16,10 @@
 </template>
 
 <script>
-console.log('estoy en import');
+
 import LoginForm from './components/LoginForm.vue';
 import NavbarHeader from './components/NavbarHeader.vue';
+
 
 export default {
   name: 'App',
@@ -25,17 +27,13 @@ export default {
     LoginForm,
     NavbarHeader,
     
+    
 },
 };
 </script>
 
 <style>
-.contForm {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 /* Estilos globales de la aplicación */
 html, body {

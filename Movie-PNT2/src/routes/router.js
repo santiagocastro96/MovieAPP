@@ -1,24 +1,28 @@
 // src/router.js
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginView from '../views/LoginView.vue';
+import LoginForm from "../components/LoginForm.vue"
+//import Home from "../views/Home.vue"
+//import App from "../App.vue"
+import MovieDetails from '../components/MovieDetails.vue';
+
 
 const routes = [
   {
     path: '/', // 
-    name: '/home', // 
-    component: LoginView, // 
+    name: 'home', // 
+    component: LoginForm, // 
   },
   {
-    path: '/',
-    name: '/list',
-    
+    path: '/movie-details',
+    name: 'movie-details',
+    component: MovieDetails,
   }
   
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
 export default router;

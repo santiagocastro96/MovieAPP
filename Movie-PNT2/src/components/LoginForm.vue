@@ -29,23 +29,8 @@
     </body>
   </template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        isHovered: false,
-      };
-    },
-    computed: {
-      buttonStyle() {
-        return {
-          background: this.isHovered ? '#42b0ff' : 'var(--ultramarine-600)',
-        };
-      },
-    },
-  };
+  <script setup>
+  
   </script>
   
   <style scoped>
