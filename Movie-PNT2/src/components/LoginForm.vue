@@ -34,7 +34,27 @@
   </script>
   
   <style scoped>
-  body{
+  .Movie-View{
+  position: relative; /* Pos label */
+  display: inline-block; /* Para que ocupe SOLO el ancho del contenido */
+
+  
+  background-color: #2729ac; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  padding: 10px 20px; /* Relleno interno para darle tamaño */
+  border: 2px solid #1f1fa4; /* Borde con color */
+  border-radius: 20px; /* Borde redondeado para un aspecto ovalado */
+
+  /* Posición de la etiqueta */
+  top: -130px; /* Mueve la etiqueta hacia arriba */
+  left: 50%; /* La posiciona en el centro horizontal */
+  transform: translateX(-50%); /* La ajusta horizontalmente */
+  position: relative;
+
+  box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.5) /*sombrita (?*/
+  }
+
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +62,7 @@
     background: url("https://w0.peakpx.com/wallpaper/570/413/HD-wallpaper-red-cinema-chair.jpg") no-repeat;
     background-size: cover;
     background-position: center;
+  
 }
 
 .wrapper{

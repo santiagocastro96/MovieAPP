@@ -1,12 +1,13 @@
 <!-- src/views/LoginView.vue -->
 <template>
     <div>
-      <LoginForm />
+      <login-form />
+      
     </div>
   </template>
   
   <script>
-  import LoginForm from '../components/LoginForm.vue';
+  import LoginForm from './components/LoginForm.vue';
   
   </script>
   
