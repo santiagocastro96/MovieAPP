@@ -34,9 +34,8 @@ onMounted(async () => {
     await service.fetchPopularMovies();
 })
 
-function imageFilter(image){
-    return "https://image.tmdb.org/t/p/w300/" + image
-}
+const imageFilter = (image) => "https://image.tmdb.org/t/p/w300/" + image
+
 
 
 

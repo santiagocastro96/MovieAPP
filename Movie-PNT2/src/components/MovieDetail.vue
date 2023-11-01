@@ -29,9 +29,8 @@ onMounted(async() => {
     await service.getMovieById(id)
 })
 
-function imageFilter(image){
-    return "https://image.tmdb.org/t/p/w300/" + image
-}
+const imageFilter = (image) => "https://image.tmdb.org/t/p/w300/" + image
+
 
 </script>
 
