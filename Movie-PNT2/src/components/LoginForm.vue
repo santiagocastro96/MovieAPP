@@ -3,14 +3,25 @@
     <div class="wrapper">
         <form action="">
             <h1>Login</h1>
+            <div class="pError">
+                    <p v-show="usuario.length < 5">Ingresa un nombre completo</p>
+                
             <div class="input-box">
-                <input type="text" name="" id="userInput" placeholder="username" required>
+                
+                
+                <input type="text" name="" id="userInput" placeholder="username" required v-model="usuario" @input="validarUsuario" :style="{borderColor: bordeColorUser}">
+                
                 <i class="fa fa-user"></i>
             </div>
+        </div>
+
+        <div class="pError">
+                    <p v-show="password.length < 5">Ingresa una clave valida</p>
 
             <div class="input-box">
-                <input type="password" name="" id="passInput" placeholder="password" required>
+                <input type="password" name="" id="passInput" placeholder="password" required v-model="password" @input="validarPassword" :style="{borderColor: bordeColorPassword}">
                 <i class="fa fa-lock"></i>
+            </div>
             </div>
 
             <div class="remember-forget">
@@ -30,6 +41,36 @@
   </template>
   
   <script setup>
+
+import { ref, watch } from 'vue';
+
+const usuario = ref('');
+const password = ref('');
+const bordeColorUser = ref('');
+const bordeColorPassword = ref('')
+
+
+const validarUsuario = () => {
+  if (usuario.value.length < 5) {
+    bordeColorUser.value = 'rgb(128, 37, 31, .6)';
+  } else {
+    bordeColorUser.value = 'rgb(103, 209, 21, .2)';
+  }
+};
+
+const validarPassword = () => {
+    if(password.value.length < 5){
+        bordeColorPassword.value = 'rgb(128, 37, 31, .6)';
+    } else {
+        bordeColorPassword.value = 'rgb(103, 209, 21, .2)';
+  }
+}
+
+watch(usuario, validarUsuario);
+
+
+
+
   
   </script>
   
@@ -45,6 +86,13 @@ body{
     background-position: center;
 }
 
+
+.pError p{
+    color: crimson;
+    text-align: center;
+    position: relative;
+    top: 25px;
+}
 
 .wrapper{
     width: 420px;
