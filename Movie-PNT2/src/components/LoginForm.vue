@@ -4,22 +4,25 @@
         <form action="">
             <h1>Login</h1>
             <div class="pError">
-                    <p v-show="usuario.length < 5">Ingresa un nombre completo</p>
+                    <p>Ingresa un nombre completo</p>
                 
             <div class="input-box">
                 
                 
-                <input type="text" name="" id="userInput" placeholder="username" required v-model="usuario" @input="validarUsuario" :style="{borderColor: bordeColorUser}">
+                <input type="text" name="username" id="userInput" placeholder="username" required v-model="_username"  @input="validarUsuario" :style="{borderColor: bordeColorUser}">
                 
                 <i class="fa fa-user"></i>
             </div>
         </div>
+        <div class="pError">
+  <p v-show="error">{{ error }}</p>
+</div>
 
         <div class="pError">
-                    <p v-show="password.length < 5">Ingresa una clave valida</p>
+                    <p>Ingresa una clave valida</p>
 
             <div class="input-box">
-                <input type="password" name="" id="passInput" placeholder="password" required v-model="password" @input="validarPassword" :style="{borderColor: bordeColorPassword}">
+                <input type="password" name="password" id="passInput" placeholder="password" required v-model="_password"  @input="validarPassword" :style="{borderColor: bordeColorPassword}">
                 <i class="fa fa-lock"></i>
             </div>
             </div>
@@ -29,19 +32,65 @@
                 <a href="#">Lorem ipsun</a>
             </div>
 
-            <button type="submit" class="btn" id="btn">Login</button>
+            <button type="submit" class="btn" id="btn" @click="loginUser">Loginnn</button>
 
             <div class="register-link">
                 <p>¿No tienes una cuenta? <a href="#">Registrate!</a></p>
             </div>
 
         </form>
+        <button @click="verValores">Ver valores</button>
+        <button v-if="!hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
     </div>
     </body>
   </template>
   
   <script setup>
 
+//codigo agregado por javi
+import { useAuthStore } from '../Stores/authStore';
+import {storeToRefs} from 'pinia';
+import { ref } from 'vue';
+
+const authStore = useAuthStore()
+const {login} = authStore
+
+const _username = ref('');
+const _password = ref('');
+
+const loginUser = ()=>{
+console.log("entro a autenticar")
+const username = _username;
+const password = _password;
+console.log(username)
+login(username, password)
+
+}
+
+
+
+
+const verValores = ()=>{
+  console.log(authStore.usuario)
+}
+
+const {hayUsuarioAutenticado} = storeToRefs(authStore)
+
+
+
+
+const validarUsuario = () => {
+
+};
+
+const validarPassword = () => {
+
+}
+
+
+
+
+/* codigo anterior:
 import { ref, watch } from 'vue';
 
 const usuario = ref('');
@@ -67,7 +116,7 @@ const validarPassword = () => {
 }
 
 watch(usuario, validarUsuario);
-
+*/
 
 
 
