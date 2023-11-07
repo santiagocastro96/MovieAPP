@@ -4,7 +4,7 @@
         <form action="">
             <h1>Login</h1>
             <div class="pError">
-                    <p>Ingresa un nombre completo</p>
+                    <p v-show="_username.length < 5">Ingresa un nombre completo</p>
                 
             <div class="input-box">
                 
@@ -14,12 +14,10 @@
                 <i class="fa fa-user"></i>
             </div>
         </div>
-        <div class="pError">
-  <p v-show="error">{{ error }}</p>
-</div>
+        
 
         <div class="pError">
-                    <p>Ingresa una clave valida</p>
+                    <p v-show="_password.length < 5">Ingresa una clave valida</p>
 
             <div class="input-box">
                 <input type="password" name="password" id="passInput" placeholder="password" required v-model="_password"  @input="validarPassword" :style="{borderColor: bordeColorPassword}">
@@ -80,28 +78,17 @@ const {hayUsuarioAutenticado} = storeToRefs(authStore)
 
 
 
-const validarUsuario = () => {
-
-};
-
-const validarPassword = () => {
-
-}
 
 
 
+/* VALIDACIONES => DEPENDIENDO DEL RESULTADO CAMBIA EL COLOR DEL BORDE DEL INPUT */
 
-/* codigo anterior:
-import { ref, watch } from 'vue';
-
-const usuario = ref('');
-const password = ref('');
 const bordeColorUser = ref('');
 const bordeColorPassword = ref('')
 
 
 const validarUsuario = () => {
-  if (usuario.value.length < 5) {
+  if (_username.value.length < 5) {
     bordeColorUser.value = 'rgb(128, 37, 31, .6)';
   } else {
     bordeColorUser.value = 'rgb(103, 209, 21, .2)';
@@ -109,15 +96,14 @@ const validarUsuario = () => {
 };
 
 const validarPassword = () => {
-    if(password.value.length < 5){
+    if(_password.value.length < 5){
         bordeColorPassword.value = 'rgb(128, 37, 31, .6)';
     } else {
         bordeColorPassword.value = 'rgb(103, 209, 21, .2)';
   }
 }
 
-watch(usuario, validarUsuario);
-*/
+/***************************************************** */
 
 
 
