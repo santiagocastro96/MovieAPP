@@ -7,11 +7,12 @@
         </header>
         <div class="detalles">
             <div class="portada">
+                <!--Agregar boton de alquilar (no tiene porque estar exactamente en esta linea)-->
                 <img :src="imageFilter(movie.backdrop_path)" alt="Título de la Película" width="800" height="600">
             </div>
             <div class="informacion">
                 <p><strong>Director:</strong> {{ director.name }}</p>
-               
+                
                 <p><strong>Reparto:</strong></p>
                 <ul>
                   <li v-for="actor in actors">{{ actor }}</li>
@@ -50,7 +51,8 @@ const threeActors = ref([])
 
 
 
-
+//TODO: Agregar que si estas logueado, al apretar el botón de alquilar pelicula, se muestre un cartel de que la alquilaste y,
+// en caso de no estar logueado te lleve a la pagina de login
 
 onMounted(async() => {
     const id = route.params.id
