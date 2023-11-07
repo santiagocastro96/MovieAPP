@@ -1,6 +1,7 @@
 <template>
   <div class="contenedor">
 
+    
   
   <div class="card" style="width: 18rem;" v-for="movie in movies" :key="movie.id">
   <img class="card-img-top" :src="imageFilter(movie.backdrop_path)" :alt="movie.title">
@@ -28,7 +29,9 @@ import { RouterLink } from 'vue-router';
 
 const service = new MovieService();
 const movies = service.getMovies();
+const filteredMovies = service.getMovieFound();
 
+console.log(filteredMovies);
 
 onMounted(async () => {
     await service.fetchPopularMovies();

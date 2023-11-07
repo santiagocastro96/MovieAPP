@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <RouterLink to="/" class="navbar-brand">Navbar</RouterLink>
+  <RouterLink to="/" class="navbar-brand">Home</RouterLink>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,17 +29,33 @@
       <li class="nav-item">
         <RouterLink to="/login" class="nav-link disabled">Login</RouterLink>
       </li>
+
+      <li class="nav-item">
+        <RouterLink to="/register" class="nav-link disabled">Registrarse</RouterLink>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" v-model="movieName" @input="filterMovies">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    
   </div>
 </nav>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import MovieService from '../services/MovieService';
+/*
+const service = new MovieService();
+const movieName = ref("");
+
+function filterMovies(){
+  service.searchMovie(movieName.value)
+}*/
+
+
+//console.log(movies)
 
 </script>
 

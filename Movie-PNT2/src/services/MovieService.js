@@ -6,6 +6,7 @@ class MovieService {
     credits;
     director;
     actors;
+    foundMovies;
 
     constructor(){
         this.movies = ref([])
@@ -13,6 +14,7 @@ class MovieService {
         this.credits = ref("")
         this.director = ref("");
         this.actors = ref([])
+        this.foundMovies = ref([])
     }
 
     getMovies(){
@@ -35,14 +37,19 @@ class MovieService {
         return this.actors;
     }
 
+    getMovieFound(){
+        return this.foundMovies;
+    }
+
     async fetchPopularMovies(){
         try {
-            const url = "https://api.themoviedb.org/3/movie/popular?api_key=b2dd2751da85c7ad32671ddb27a345d1";
+            const url = "https://api.themoviedb.org/3/movie/popular?api_key=b2dd2751da85c7ad32671ddb27a345d1"
             const response = await fetch(url);
           //  console.log(response);
             const json = await response.json()
             const data = await json.results;
             this.movies.value = data
+
 
         //    console.log(this.movies.value)
 
@@ -88,6 +95,12 @@ class MovieService {
         } catch (error) {
             console.error(error)
         }
+    }
+
+
+    searchMovie(name){ //DEJAR PARA EL FINAL
+        let search = this.movies.filter((movie) => movie.original_title === name);
+        this.foundMovies.value = search;
     }
 }
 

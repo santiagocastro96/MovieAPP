@@ -46,14 +46,13 @@ const credits = service.getCredits();
 const director = service.getDirector();
 const actors = service.getActors();
 
-const threeActors = ref([])
 
 
 
 
 
 onMounted(async() => {
-    const id = route.params.id
+    const {id} = route.params
     await service.getMovieById(id)
     await service.getCreditsOfMovie(id)
 })
