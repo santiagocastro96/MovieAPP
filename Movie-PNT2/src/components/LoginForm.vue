@@ -32,7 +32,7 @@
                 <a href="#">Lorem ipsun</a>
             </div>
 
-            <button type="submit" class="btn" id="btn" @click="loginUser">Loginnn</button>
+            <button type="button" class="btn" id="btn" @click="loginUser">Loginnn</button>
 
             <div class="register-link">
                 <p>¿No tienes una cuenta? <a href="#">Registrate!</a></p>
@@ -60,8 +60,8 @@ const _password = ref('');
 
 const loginUser = ()=>{
 console.log("entro a autenticar")
-const username = _username;
-const password = _password;
+const username = _username.value;
+const password = _password.value;
 console.log(username)
 login(username, password)
 
@@ -71,7 +71,8 @@ login(username, password)
 
 
 const verValores = ()=>{
-  console.log(authStore.usuario)
+  console.log(authStore._username)
+  console.log(hayUsuarioAutenticado)
 }
 
 const {hayUsuarioAutenticado} = storeToRefs(authStore)

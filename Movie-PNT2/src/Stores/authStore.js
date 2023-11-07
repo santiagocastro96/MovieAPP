@@ -9,25 +9,17 @@ export const useAuthStore = defineStore("authStore",()=>{
 
     //action
     function login(username, password){
-        
 
-      //TODO: Arreglar esta parte para ver: 1) que lleguen los datos del form correctamente. 2) Que estos
-      //      se comparen con los de la base de datos. 3)que si el dato esta correcto se guarden para ser validados con el "hayUsuarioAutenticado"
 
         //validaciones
-        console.log(username);
-        console.log("llego " + password);
+        console.log("llego usuario: " + username + " y contraseña: " + password);
         const user = users.find(user => user.username === username && user.password === password);
-
-        console.log('tratando de acceder a :' + _username);
         if(user){
         _username.value = username
         _password.value = password
-        //_userId.value = userId
         }
-        console.log('autenticado este usuario :' + _username);
+        console.log('autenticado este usuario :' + _username.value);
     }
-
 
     //TODO: agregar el botón de logout donde corresponda en la interfaz (y que aparesca con un v-if en caso de que se esté logueado)
     function logout (){
@@ -40,20 +32,18 @@ export const useAuthStore = defineStore("authStore",()=>{
     
 
     //getter
-    const usuario = {
-      username : computed(()=> _username.value),
-      password : computed(()=> _password.value)
-    }
+
     
     const hayUsuarioAutenticado = computed(()=> {
       console.log("verificando usuario final");
+      //TODO: esta validando esto bien? no parece
       //TODO: hacer que la validación corrabore que tipo de usuario sos. Se tiene que diferenciar si sos usuario Admin o usuario "comun"
-      return usuario.username.value !== "" && usuario.password.value !== "";
+      return _username.value !== "" && _password.value !== "";
     })
 
 
     //que exponemos
-    return {login, logout, hayUsuarioAutenticado, usuario}
+    return {login, logout, hayUsuarioAutenticado}
 })
 
 
