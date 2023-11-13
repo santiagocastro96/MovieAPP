@@ -7,7 +7,6 @@
         </header>
         <div class="detalles">
             <div class="portada">
-                <!--Agregar boton de alquilar (no tiene porque estar exactamente en esta linea)-->
                 <img :src="imageFilter(movie.backdrop_path)" alt="Título de la Película" width="800" height="600">
             </div>
             <div class="informacion">
@@ -20,6 +19,9 @@
                 <p class="sinopsis"><strong>Sinopsis:</strong> {{ movie.overview }}</p>
             </div>
         </div>
+        <button v-on:click="alquilar" class="boton-alquilar">Alquilar</button>
+        <p v-if="messageVisible" class="mensaje-alquiler"> {{ message }}  </p>
+
     </div>
 </body>
 
@@ -40,6 +42,12 @@ import { useRoute } from 'vue-router';
 import { onMounted, ref } from 'vue';
 import MovieService from '../services/MovieService';
 
+import { useAuthStore } from '../Stores/authStore';
+import {storeToRefs} from 'pinia';
+
+const authStore = useAuthStore()
+const {obtenerDireccion} = authStore
+
 const route = useRoute()
 const service = new MovieService()
 const movie = service.getMovie();
@@ -47,6 +55,23 @@ const credits = service.getCredits();
 const director = service.getDirector();
 const actors = service.getActors();
 
+const {hayUsuarioAutenticado} = storeToRefs(authStore)
+
+
+const message = 'Su alquiler se completó con éxito. Enviaremos su película a la dirección: ' + obtenerDireccion();
+
+let messageVisible = ref(false);
+
+const alquilar = () => {
+    if(hayUsuarioAutenticado){
+        messageVisible.value = true;
+    }
+    else{
+
+    }
+     
+
+}
 
 
 
@@ -60,6 +85,7 @@ onMounted(async() => {
 })
 
 const imageFilter = (image) => "https://image.tmdb.org/t/p/w300/" + image
+
 
 
 </script>
@@ -127,6 +153,19 @@ p {
     font-size: 16px;
 }
 
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
 
 /*
 .contenedor{

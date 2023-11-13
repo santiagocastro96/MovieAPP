@@ -34,11 +34,16 @@
         <RouterLink to="/register" class="nav-link disabled">Registrarse</RouterLink>
       </li>
     </ul>
+    
+    <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
+    <button v-if="hayAdmin" @click="desAutenticar">Logouttt</button>
+
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     
+
   </div>
 </nav>
 </template>
@@ -46,6 +51,19 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import MovieService from '../services/MovieService';
+import {storeToRefs} from 'pinia';
+import { useAuthStore } from '../Stores/authStore';
+
+const authStore = useAuthStore()
+const {logout} = authStore
+
+const desAutenticar = () => {
+    logout();
+}
+
+const {hayUsuarioAutenticado} = storeToRefs(authStore)
+const {hayAdmin} = storeToRefs(authStore)
+
 /*
 const service = new MovieService();
 const movieName = ref("");
@@ -60,4 +78,5 @@ function filterMovies(){
 </script>
 
 <style scoped>
+
 </style>

@@ -38,7 +38,7 @@
 
         </form>
         <button @click="verValores">Ver valores</button>
-        <button v-if="!hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
+        <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
     </div>
     </body>
   </template>
@@ -65,15 +65,14 @@ login(username, password)
 
 }
 
-
-
-
 const verValores = ()=>{
-  console.log(authStore._username)
-  console.log(hayUsuarioAutenticado)
+
+  console.log("hay usuario: " + hayUsuarioAutenticado.value)
+  console.log("hay usuario admin: " + hayAdmin.value)
 }
 
 const {hayUsuarioAutenticado} = storeToRefs(authStore)
+const {hayAdmin} = storeToRefs(authStore)
 
 
 

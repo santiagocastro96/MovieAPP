@@ -3,8 +3,10 @@ import {ref, computed} from 'vue'
 import { users } from '../data/users'
 
 export const useAuthStore = defineStore("authStore",()=>{
-    const _username = ref(0)
-    const _password = ref(0)
+    const _username = ref("")
+    const _password = ref("")
+    const _hayAdmin = ref(0)
+    const _direccion = ref("")
     
 
     //action
@@ -17,7 +19,13 @@ export const useAuthStore = defineStore("authStore",()=>{
         if(user){
         _username.value = username
         _password.value = password
+        _direccion.value = user.direccion
+
+        if(user.role === 1){
+          _hayAdmin.value = user.role;
         }
+        }
+        
         console.log('autenticado este usuario :' + _username.value);
     }
 
@@ -27,54 +35,28 @@ export const useAuthStore = defineStore("authStore",()=>{
         console.log("entro a desloguear")
         _username.value = ""
         _password.value = ""
-        
+        _hayAdmin.value = 0
     }
     
 
     //getter
+    function obtenerDireccion(){
+      console.log("entro al obtener " + _direccion.value)
+      return _direccion.value
+    }
 
-    
+
     const hayUsuarioAutenticado = computed(()=> {
-      console.log("verificando usuario final");
-      //TODO: esta validando esto bien? no parece
       //TODO: hacer que la validación corrabore que tipo de usuario sos. Se tiene que diferenciar si sos usuario Admin o usuario "comun"
-      return _username.value !== "" && _password.value !== "";
+
+      return  _username.value !== "" && _password.value !== "";
+    })
+    const hayAdmin = computed(()  =>{
+      return _hayAdmin.value === 1
     })
 
 
+
     //que exponemos
-    return {login, logout, hayUsuarioAutenticado}
+    return {login, logout, hayUsuarioAutenticado, hayAdmin, obtenerDireccion}
 })
-
-
-/*import { createPinia, defineStore } from 'pinia';
-import { users } from '../data/users';
-import {ref,computed} from 'vue';
-
-
-export const pinia = createPinia();
-
-// Módulo de autenticación
-export const useAuthStore = defineStore('authStore', {
-    state: () => ({
-      user: null,
-      role: null,
-    }),
-    getters: {
-      isAdmin: (state) => state.user && state.user.username === 'admin',
-    },
-    actions: {
-        login(username, password) {
-            const user = users.find((u) => u.username === username && u.password === password);
-            if (user) {
-              this.user = { username: user.username };
-              this.role = user.role;
-            }
-      },
-      logout() {
-        this.user = null;
-        this.role = null;
-      },
-    },
-  })
-  */
