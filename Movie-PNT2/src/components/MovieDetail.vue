@@ -20,7 +20,7 @@
             </div>
         </div>
         <button v-on:click="alquilar" class="boton-alquilar">Alquilar</button>
-        <p v-if="messageVisible" class="mensaje-alquiler"> {{ message }}  </p>
+        <p v-show="messageVisible" class="mensaje-alquiler"> {{ message }}  </p>
 
     </div>
 </body>
@@ -45,6 +45,9 @@ import MovieService from '../services/MovieService';
 import { useAuthStore } from '../Stores/authStore';
 import {storeToRefs} from 'pinia';
 
+
+import router from "../routes/router"
+
 const authStore = useAuthStore()
 const {obtenerDireccion} = authStore
 
@@ -63,16 +66,18 @@ const message = 'Su alquiler se completó con éxito. Enviaremos su película a 
 let messageVisible = ref(false);
 
 const alquilar = () => {
-    if(hayUsuarioAutenticado){
+    if(!hayUsuarioAutenticado){
         messageVisible.value = true;
-    }
-    else{
-
-    }
-     
+        console.log(route.params);
+        console.log()
+        //route.path.replace(`/movie/${route.params.id}`, "/login")
+        
 
 }
-
+else{
+    router.push("/login")
+}
+}
 
 
 //TODO: Agregar que si estas logueado, al apretar el botón de alquilar pelicula, se muestre un cartel de que la alquilaste y,
