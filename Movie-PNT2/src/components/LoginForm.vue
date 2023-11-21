@@ -49,19 +49,31 @@
 import { useAuthStore } from '../Stores/authStore';
 import {storeToRefs} from 'pinia';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import router from "../routes/router"
 
 const authStore = useAuthStore()
 const {login} = authStore
 
+
+
 const _username = ref('');
 const _password = ref('');
 
-const loginUser = ()=>{
+const loginUser = async ()=>{
+
 console.log("entro a autenticar")
 const username = _username.value;
 const password = _password.value;
 console.log(username)
+
+
 login(username, password)
+if (hayUsuarioAutenticado.value) {
+    router.go(-1);
+}
+
+
 
 }
 

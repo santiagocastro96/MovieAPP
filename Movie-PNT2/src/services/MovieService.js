@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import axios from 'axios';
 
 class MovieService {
     movies;
@@ -98,9 +99,19 @@ class MovieService {
     }
 
 
-    searchMovie(name){ //DEJAR PARA EL FINAL
-        let search = this.movies.filter((movie) => movie.original_title === name);
-        this.foundMovies.value = search;
+    async searchMovie(query){ //DEJAR PARA EL FINAL
+        try {
+            if (!query) {
+                return [];
+            }
+
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=b2dd2751da85c7ad32671ddb27a345d1&query=${query}`;
+            const response = await axios.get(url);
+            return response.data.results || [];
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
     }
 }
 

@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 import { users } from '../data/users'
 
+
 export const useAuthStore = defineStore("authStore",()=>{
     const _username = ref("")
     const _password = ref("")
@@ -27,6 +28,7 @@ export const useAuthStore = defineStore("authStore",()=>{
         }
         
         console.log('autenticado este usuario :' + _username.value);
+        
     }
 
     //TODO: agregar el botón de logout donde corresponda en la interfaz (y que aparesca con un v-if en caso de que se esté logueado)

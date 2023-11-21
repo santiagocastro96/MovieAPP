@@ -12,9 +12,8 @@ const routes = [
   { path : "/", component : Home},
   { path : "/login", component : LoginForm},
   { path : "/register", component : RegisterForm},
-  { path : "/movie/:id", component : MovieDetail}
-  
-  
+  { path : "/movie/:id", component : MovieDetail},
+ 
 ];
 
 const router = createRouter({

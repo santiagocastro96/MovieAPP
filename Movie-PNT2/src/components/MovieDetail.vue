@@ -66,7 +66,7 @@ const message = 'Su alquiler se completó con éxito. Enviaremos su película a 
 let messageVisible = ref(false);
 
 const alquilar = () => {
-    if(!hayUsuarioAutenticado){
+    if(!hayUsuarioAutenticado.value){
         messageVisible.value = true;
         console.log(route.params);
         console.log()
