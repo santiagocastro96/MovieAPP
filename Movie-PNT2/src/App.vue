@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavbarHeader />
-    <Search />
+    
     <div id="router-container">
       <router-view />
     </div>
@@ -12,7 +12,7 @@
 <script setup>
 
 import NavbarHeader from './components/NavbarHeader.vue';
-import Search from './components/Search.vue';
+
 
 </script>
 
@@ -33,13 +33,7 @@ html, body {
 #router-container {
   padding-top: 10px; /* Ajusta según el tamaño de tu barra de navegación */
 }
-.Search {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999; /* Asegura que Search esté por encima de otros elementos */
-}
+
 
 
 </style>

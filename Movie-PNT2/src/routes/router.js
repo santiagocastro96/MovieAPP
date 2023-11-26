@@ -14,7 +14,7 @@ const routes = [
   { path : "/login", component : LoginForm},
   { path : "/register", component : RegisterForm},
   { path : "/movie/:id", name: 'movie', component : MovieDetail},
-  { path : "/Stats", component : Stats},
+  { path : "/stats", component : Stats},
   {path : "/categories", component : Categories},
 ];
 

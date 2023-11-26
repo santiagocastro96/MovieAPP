@@ -48,6 +48,7 @@ const selectMovie = (movie) => {
   // Interactuar con la película seleccionada
   // Por ejemplo, podrías sumar +1 a una estadística (a implementar)
   
+  
   console.log('Película seleccionada:', movie);
   location.reload();
   

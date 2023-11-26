@@ -8,10 +8,10 @@
   <div class="card-body">
     <h5 class="card-title">{{ movie.original_title }}</h5>
     <p class="card-text">{{ movie.overview }}</p>
-
+    
     <RouterLink :to="{path:'movie/' + movie.id}">
    <button class="btn btn-primary">Go Somewhere</button>
-</RouterLink> 
+  </RouterLink> 
 
   </div>
 </div>

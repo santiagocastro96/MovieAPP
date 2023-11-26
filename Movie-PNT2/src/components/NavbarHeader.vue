@@ -7,40 +7,23 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-
-      <li class="nav-item">
-        <RouterLink to="/login" class="nav-link disabled">Login</RouterLink>
-      </li>
-
-      <li class="nav-item">
-        <RouterLink to="/register" class="nav-link disabled">Registrarse</RouterLink>
-      </li>
+      <li class="nav-item" v-if="!hayUsuarioAutenticado">
+          <RouterLink :to="hayUsuarioAutenticado ? '#' : '/login'" class="nav-link" :class="{ 'disabled': hayUsuarioAutenticado }">Login</RouterLink>
+        </li>
+        <li class="nav-item" v-if="!hayUsuarioAutenticado">
+          <RouterLink :to="hayUsuarioAutenticado ? '#' : '/register'" class="nav-link" :class="{ 'disabled': hayUsuarioAutenticado }">Registrarse</RouterLink>
+        </li>
       <li class="nav-item">
         <RouterLink to="/categories" class="nav-link disabled">Categorias</RouterLink>
       </li>
-
+      <li class="nav-item">
+        <Search />
+      </li>
     </ul>
     
     <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
-    <button v-if="hayAdmin" @click="desAutenticar">Logouttt</button>
+    <button v-if="hayAdmin" @click="goStatistics">Estadisticas</button>
     
     <!--Reviendo desde abajo-->
     
@@ -55,7 +38,7 @@
 import { RouterLink } from 'vue-router';
 import {storeToRefs} from 'pinia';
 import { useAuthStore } from '../Stores/authStore';
-import Search from './Search.vue';
+import Search from '../components/Search.vue';
 
 const authStore = useAuthStore()
 const {logout} = authStore
@@ -67,9 +50,18 @@ const desAutenticar = () => {
 const {hayUsuarioAutenticado} = storeToRefs(authStore)
 const {hayAdmin} = storeToRefs(authStore)
 
+const goStatistics = () =>{
+  router.push("/stats")
+}
 
 </script>
 
 <style scoped>
-
+.Search {
+  position: fixed;
+  top: 3%; /* Coloca el componente en el 50% superior del contenedor */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el componente horizontal y verticalmente */
+  z-index: 999; /* Asegura que Search esté por encima de otros elementos */
+}
 </style>
