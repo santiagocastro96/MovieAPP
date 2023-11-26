@@ -5,7 +5,7 @@ import Home from "../views/Home.vue"
 import MovieDetail from "../components/MovieDetail.vue";
 import RegisterForm from "../components/RegisterForm.vue";
 import Stats from "../components/Stats.vue";
-
+import Categories from "../components/Categories.vue";
 
 const routes = [
   
@@ -15,6 +15,7 @@ const routes = [
   { path : "/register", component : RegisterForm},
   { path : "/movie/:id", name: 'movie', component : MovieDetail},
   { path : "/Stats", component : Stats},
+  {path : "/categories", component : Categories},
 ];
 
 const router = createRouter({

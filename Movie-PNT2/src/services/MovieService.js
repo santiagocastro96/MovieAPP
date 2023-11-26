@@ -8,6 +8,7 @@ class MovieService {
     director;
     actors;
     foundMovies;
+    categories;
 
     constructor(){
         this.movies = ref([])
@@ -16,6 +17,7 @@ class MovieService {
         this.director = ref("");
         this.actors = ref([])
         this.foundMovies = ref([])
+        this.categories = ref([])
     }
 
     getMovies(){
@@ -41,6 +43,10 @@ class MovieService {
     getMovieFound(){
         return this.foundMovies;
     }
+    getCategories(){
+        return this.categories;
+    }
+
 
     async fetchPopularMovies(){
         try {

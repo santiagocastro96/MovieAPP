@@ -33,6 +33,10 @@
       <li class="nav-item">
         <RouterLink to="/register" class="nav-link disabled">Registrarse</RouterLink>
       </li>
+      <li class="nav-item">
+        <RouterLink to="/categories" class="nav-link disabled">Categorias</RouterLink>
+      </li>
+
     </ul>
     
     <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
