@@ -33,11 +33,16 @@
       <li class="nav-item">
         <RouterLink to="/register" class="nav-link disabled">Registrarse</RouterLink>
       </li>
+      
+      <li class="nav-item">
+        <RouterLink to="/categories" class="nav-link disabled">Categorias</RouterLink>
+      </li>
     </ul>
     
     <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
-    <button v-if="hayAdmin" @click="desAutenticar">Logouttt</button>
-    
+    <button v-if="hayAdmin" @click="goStatistics">Estadisticas</button>
+
+
     <!--Reviendo desde abajo-->
     
     
@@ -53,6 +58,10 @@ import {storeToRefs} from 'pinia';
 import { useAuthStore } from '../Stores/authStore';
 import Search from './Search.vue';
 
+import { useRoute } from 'vue-router';
+import router from "../routes/router"
+
+const route = useRoute()
 const authStore = useAuthStore()
 const {logout} = authStore
 
@@ -63,7 +72,9 @@ const desAutenticar = () => {
 const {hayUsuarioAutenticado} = storeToRefs(authStore)
 const {hayAdmin} = storeToRefs(authStore)
 
-
+const goStatistics = () =>{
+  router.push("/statistics")
+}
 </script>
 
 <style scoped>

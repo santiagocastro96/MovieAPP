@@ -4,6 +4,7 @@ import LoginForm from "../components/LoginForm.vue"
 import Home from "../views/Home.vue"
 import MovieDetail from "../components/MovieDetail.vue";
 import RegisterForm from "../components/RegisterForm.vue";
+import Categories from "../components/Categories.vue"
 import App from "../App.vue"
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
   { path : "/login", component : LoginForm},
   { path : "/register", component : RegisterForm},
   { path : "/movie/:id", component : MovieDetail},
+  {path : "/categories", component : Categories},
  
 ];
 
