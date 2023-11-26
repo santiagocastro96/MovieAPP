@@ -16,8 +16,13 @@
             :key="movie.id"
             class="list-group-item"
             @click="selectMovie(movie)"
+            
           >
-            {{ movie.title }}
+          <router-link :to="{ name: 'movie', params: { id: movie.id } }" :exact="true" :force="true">
+             {{ movie.title }}
+          </router-link>
+          
+
           </li>
         </ul>
       </div>
@@ -28,6 +33,7 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import MovieService from '../services/MovieService';
+import { RouterLink } from 'vue-router';
 
 const service = new MovieService();
 const searchString = ref('');
@@ -39,9 +45,12 @@ const searchMovies = async () => {
 };
 
 const selectMovie = (movie) => {
-  //Cuando se selecciona sumar +1 a estadistica - a implementar
-  //llevar a pelicula - a implementar
+  // Interactuar con la película seleccionada
+  // Por ejemplo, podrías sumar +1 a una estadística (a implementar)
+  
   console.log('Película seleccionada:', movie);
+  location.reload();
+  
 };
 
 watch(searchString, searchMovies);

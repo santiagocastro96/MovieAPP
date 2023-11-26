@@ -20,7 +20,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior() {
+    // Agrega una animación de desplazamiento al inicio de la nueva ruta
+    return { top: 0 };
+  },
 });
 
 export default router;
