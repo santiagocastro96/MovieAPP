@@ -9,6 +9,7 @@ class MovieService {
     actors;
     foundMovies;
     categories;
+    moviesCategory;
 
     constructor(){
         this.movies = ref([])
@@ -18,6 +19,7 @@ class MovieService {
         this.actors = ref([])
         this.foundMovies = ref([])
         this.categories = ref([])
+        this.moviesCategory = ref([]);
     }
 
     getMovies(){
@@ -45,6 +47,10 @@ class MovieService {
     }
     getCategories(){
         return this.categories;
+    }
+    
+    getMoviesFilterByCategory(){
+        return this.moviesCategory;
     }
 
 
@@ -132,6 +138,41 @@ class MovieService {
           return [];
         }
       }
+
+    async getMoviesByCategory(idCategory){
+        
+        try {
+           
+            const url = "https://api.themoviedb.org/3/movie/popular?api_key=b2dd2751da85c7ad32671ddb27a345d1"
+            const response = await fetch(url);
+          //  console.log(response);
+            const json = await response.json()
+            const data = await json.results;
+            console.log(data);
+
+            const peliculasPorCategoria = data.filter((pelicula) => pelicula.genre_ids.find(genero => genero === idCategory))
+           
+
+           // console.log(this.moviesCategory.value);
+
+          
+
+           this.moviesCategory.value.splice(0, this.moviesCategory.value.length)
+
+            for(let i = 0; i < peliculasPorCategoria.length; i++){
+                this.moviesCategory.value.push(peliculasPorCategoria[i])
+            }
+            
+            console.log(this.moviesCategory.value);
+
+           // console.log("Peliculas filtradas por categoria: " + this.getMoviesFilterByCategory());
+
+            
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
     
 }
 
