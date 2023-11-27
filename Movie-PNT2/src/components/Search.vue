@@ -35,6 +35,10 @@ import { ref, watch, onMounted } from 'vue';
 import MovieService from '../services/MovieService';
 import { RouterLink } from 'vue-router';
 
+import router from "../routes/router"
+import { useRoute } from 'vue-router';
+const route = useRoute()
+
 const service = new MovieService();
 const searchString = ref('');
 const foundMovies = ref([]);
@@ -56,10 +60,25 @@ const selectMovie = (movie) => {
 
 watch(searchString, searchMovies);
 
+//var isOnHomePage = true;
+
 onMounted(() => {
   // Realiza la búsqueda inicial (opcional)
   searchMovies();
+  //switchSearchBar();
 });
+
+/* para ocultar la barra si no estas en la home (no funciona porque siempre estas en la view home)
+function switchSearchBar() {
+
+      if(route.path === '/'){
+        isOnHomePage = true;
+      } else{
+        isOnHomePage = false;
+      }
+    };
+
+  */
 </script>
 
 <style scoped>

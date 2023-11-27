@@ -2,7 +2,7 @@
     <body>
     <div class="contenedor">
         <header>
-            <h1>{{ movie.original_title }}</h1>
+            <h1 ref="nameFilm" >{{ movie.original_title }}</h1>
             <p class="anio">{{ movie.release_date }}</p>
         </header>
         <div class="detalles">
@@ -19,22 +19,19 @@
                 <p class="sinopsis"><strong>Sinopsis:</strong> {{ movie.overview }}</p>
             </div>
         </div>
-        <button v-on:click="alquilar" class="boton-alquilar">Alquilar</button>
+        
+        <button v-on:click="alquilar" class="boton-alquilar my-2">Alquilar</button>
         <p v-show="messageVisible" class="mensaje-alquiler"> {{ message }}  </p>
-
+        <div v-show="messageVisible">
+            <h4>¿Ya la viste? Califica la pelicula (1-5):</h4>
+            <span  v-for="star in 5" :key="star" @click="rateMovie(star)">
+                ⭐️
+            </span>
+            <h3 v-show="message2Visible">¡Gracias por puntuar la pelicula!</h3>
+        </div>
     </div>
 </body>
 
-
-    <!--
-  <div class="contenedor">
-    <img :src="imageFilter(movie.backdrop_path)" alt="">
-    <div class="details">
-    <h2>{{ movie.original_title }} ({{ movie.release_date }})</h2>
-    <h3>Overview</h3>
-    <p>{{ movie.overview }}</p>
-    </div>
-  </div> -->
 </template>
 
 <script setup>
@@ -47,6 +44,14 @@ import {storeToRefs} from 'pinia';
 
 
 import router from "../routes/router"
+import { useStatisticsStore } from '../Stores/statisticsStore';
+
+const statisticsStore = useStatisticsStore()
+const {seBuscaPelicula} = statisticsStore
+const {alquilarPelicula} = statisticsStore
+const {puntuarPelicula} = statisticsStore
+
+const nameFilm = ref(null);
 
 const authStore = useAuthStore()
 const {obtenerDireccion} = authStore
@@ -64,20 +69,25 @@ const {hayUsuarioAutenticado} = storeToRefs(authStore)
 const message = 'Su alquiler se completó con éxito. Enviaremos su película a la dirección: ' + obtenerDireccion();
 
 let messageVisible = ref(false);
+let message2Visible = ref(false);
 
 const alquilar = () => {
-    if(!hayUsuarioAutenticado.value){
+    if(hayUsuarioAutenticado.value){
+        
         messageVisible.value = true;
         console.log(route.params);
         console.log()
+        //registrar que se alquilo la pelicula
+        alquilarPelicula(nameFilm.value.textContent)
+        console.log("peli de click:" + nameFilm.value.textContent)
         //route.path.replace(`/movie/${route.params.id}`, "/login")
-        
-
 }
 else{
     router.push("/login")
 }
 }
+
+
 
 
 //TODO: Agregar que si estas logueado, al apretar el botón de alquilar pelicula, se muestre un cartel de que la alquilaste y,
@@ -87,10 +97,20 @@ onMounted(async() => {
     const {id} = route.params
     await service.getMovieById(id)
     await service.getCreditsOfMovie(id)
+
+    //registrar que se buscó la pelicula
+    console.log("Entro al valueTitle: " + nameFilm.value.textContent)
+    seBuscaPelicula(nameFilm.value.textContent);
 })
 
 const imageFilter = (image) => "https://image.tmdb.org/t/p/w300/" + image
 
+//calificar pelicula
+const rateMovie = (rating) => {
+  puntuarPelicula(nameFilm.value.textContent, rating)
+  message2Visible.value = true;
+  console.log(`Puntuación de la película: ${rating}`);
+};
 
 
 </script>

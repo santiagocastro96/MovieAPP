@@ -21,9 +21,9 @@
         <Search />
       </li>
     </ul>
+    <button class="btn btn-warning mx-2" v-if="hayAdmin" @click="goStatistics">Estadisticas</button>
+    <button class="btn btn-info" v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
     
-    <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
-    <button v-if="hayAdmin" @click="goStatistics">Estadisticas</button>
     
     <!--Reviendo desde abajo-->
     
@@ -38,7 +38,13 @@
 import { RouterLink } from 'vue-router';
 import {storeToRefs} from 'pinia';
 import { useAuthStore } from '../Stores/authStore';
+import { useRoute } from 'vue-router';
 import Search from '../components/Search.vue';
+
+
+import router from "../routes/router"
+
+const route = useRoute()
 
 const authStore = useAuthStore()
 const {logout} = authStore

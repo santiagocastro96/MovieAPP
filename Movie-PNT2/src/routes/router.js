@@ -16,6 +16,7 @@ const routes = [
   { path : "/movie/:id", name: 'movie', component : MovieDetail},
   { path : "/stats", component : Stats},
   {path : "/categories", component : Categories},
+  
 ];
 
 const router = createRouter({
