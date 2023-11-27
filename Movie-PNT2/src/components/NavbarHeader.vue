@@ -64,10 +64,12 @@ const goStatistics = () =>{
 
 <style scoped>
 .Search {
-  position: fixed;
-  top: 3%; /* Coloca el componente en el 50% superior del contenedor */
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centra el componente horizontal y verticalmente */
-  z-index: 999; /* Asegura que Search esté por encima de otros elementos */
+  width: 300px;
+  position: absolute;
+  top: 3%;
+  right: 50%; 
+  transform: translateX(50%);
 }
+
+
 </style>

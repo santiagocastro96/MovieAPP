@@ -119,6 +119,20 @@ class MovieService {
             return [];
         }
     }
+    
+    async fetchCategories() {
+        try {
+          const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=b2dd2751da85c7ad32671ddb27a345d1`;
+          const response = await axios.get(url);
+          console.log(response);
+          this.categories.value = response.data.genres || [];  // Cambié response.data.results a response.data.genres
+          return this.categories.value;
+        } catch (error) {
+          console.error(error);
+          return [];
+        }
+      }
+    
 }
 
 export default MovieService;

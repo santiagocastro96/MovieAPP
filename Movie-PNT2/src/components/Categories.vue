@@ -1,66 +1,84 @@
-<!-- Categories.vue -->
 <template>
-    <div>
-      <h2>Categorías</h2>
-      <ul>
-        <li v-for="category in categories" :key="category.id" @click="navigateToMovies(category.id)" class="category-item">
+  <div class="categories-container">
+    <!-- Lista de categorías -->
+    <div name="listCategories" class="col-lg-2 bg-light p-1">
+      <h2>| Categorías</h2>
+      <ul class="list-group">
+        <li v-for="category in categoriesList" :key="category.id" @click="selectCategory(category.id)" class="list-group-item">
           {{ category.name }}
         </li>
       </ul>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
 
-    data() {
-        return {
-            categories: [],
-        };
-  },
-    mounted() {
-      // Llamada a la API al cargar el componente
-      this.fetchCategories();
-    },
-    methods: {
-      async fetchCategories() {
-        try {
-          const apiKey = '7a6ee4c0ee234ad68d1c960e80c68d82'; 
-          const response = await axios.get('https://api.themoviedb.org/3/genre/movie/list', {
-            params: {
-              language: 'es',
-              api_key: apiKey,
-            },
-            headers: {
-            Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YTZlZTRjMGVlMjM0YWQ2OGQxYzk2MGU4MGM2OGQ4MiIsInN1YiI6IjY1MzcwNGRjYzUwYWQyMDBjYTg4OGVjZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fK3QuRBPznOu0qBRi7rGjHGcvpGlf-Pvs1cnbl9It6Y',
-    
-        },
+    <!-- Contenedor para las películas (parte central e izquierda) -->
+    <div class="movies-container">
+      <!-- Aquí puedes agregar el componente que muestra las películas -->
+      <ul>
+        <li v-for="movie in filteredMovies" :key="movie.id">
+          {{ movie.title }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
 
-          });
-          this.categories = response.data.genres;
-  
-        } catch (error) {
-          console.error('Error al cargar categorías:', error);
-        }
-      },
-      navigateToMovies(categoryId) {
-        // Redirige al usuario a la página de películas con el ID de la categoría como parámetro
-        this.$router.push({ name: 'movies', params: { categoryId } });
-     },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  h2 {
-    color: aliceblue;
-  }
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import MovieService from '../services/MovieService';
 
-  .category-item {
-    font-size: 16px;
-    color: aliceblue;
-    margin-bottom: 8px;
+const service = new MovieService();
+const categoriesList = ref([]);
+const selectedCategory = ref(null);
+const filteredMovies = ref([]);
+
+const getCategories = async () => {
+  categoriesList.value = await service.fetchCategories();
+};
+
+const selectCategory = (categoryId) => {
+  // Al seleccionar una categoría, actualiza el estado y filtra las películas
+  selectedCategory.value = categoriesList.value.find(category => category.id === categoryId);
+  filterMoviesByGenre();
+};
+
+const filterMoviesByGenre = async () => {
+  if (selectedCategory.value && selectedCategory.value.id) {
+    try {
+      const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${selectedCategory.value.id}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      filteredMovies.value = data.results || [];
+    } catch (error) {
+      console.error(error);
     }
-    </style>
+  } else {
+    // Muestra todas las películas si no hay categoría seleccionada
+    filteredMovies.value = [];
+  }
+};
+
+onMounted(() => {
+  // Realiza la búsqueda inicial (opcional)
+  getCategories();
+});
+</script>
+
+<style scoped>
+/* Estilos opcionales */
+.categories-container {
+  display: flex;
+}
+.col-lg-2 {
+  min-width: 200px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.movies-container {
+  flex-grow: 1;
+  padding: 20px;
+}
+.list-group-item {
+  cursor: pointer;
+}
+</style>

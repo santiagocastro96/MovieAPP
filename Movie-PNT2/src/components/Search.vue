@@ -88,11 +88,17 @@ function switchSearchBar() {
   top: 100%;
   left: 0;
   width: 100%;
-  max-height: 200px; /* Establece la altura máxima según tus necesidades */
-  overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
-  border: 1px solid #ced4da; /* Bordes del menú */
-  background-color: #fff; /* Color de fondo del menú */
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ced4da;
+  background-color: #fff;
   z-index: 999; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+/* Asegura que otros elementos tengan un z-index menor */
+.form-inline {
+  position: relative;
+  z-index: 1;
 }
 
 /* Estilos para la lista de resultados */
