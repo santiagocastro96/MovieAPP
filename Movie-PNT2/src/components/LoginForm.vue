@@ -30,14 +30,13 @@
                 <a href="#">Lorem ipsun</a>
             </div>
 
-            <button type="button" class="btn" id="btn" @click="loginUser">Loginnn</button>
+            <button type="button" class="btn" id="btn" @click="loginUser">Login</button>
 
             <div class="register-link">
                 <p>¿No tienes una cuenta? <a href="#">Registrate!</a></p>
             </div>
 
         </form>
-        <button @click="verValores">Ver valores</button>
         <button v-if="hayUsuarioAutenticado" @click="desAutenticar">Logout</button>
     </div>
     </body>
@@ -73,23 +72,16 @@ if (hayUsuarioAutenticado.value) {
     router.go(-1);
 }
 
-
-
 }
 
+//para debuguear el login
 const verValores = ()=>{
-
   console.log("hay usuario: " + hayUsuarioAutenticado.value)
   console.log("hay usuario admin: " + hayAdmin.value)
 }
 
 const {hayUsuarioAutenticado} = storeToRefs(authStore)
 const {hayAdmin} = storeToRefs(authStore)
-
-
-
-
-
 
 
 /* VALIDACIONES => DEPENDIENDO DEL RESULTADO CAMBIA EL COLOR DEL BORDE DEL INPUT */
